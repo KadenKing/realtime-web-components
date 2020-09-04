@@ -3,9 +3,17 @@ const crypto = require('crypto');
 const SECRET = "SUPERSECRET";
 
 const getToken = (username, projectName) => {
-    return crypto.createHmac('sha1', SECRET)
+    const signature = crypto.createHmac('sha256', SECRET)
         .update(`${username}:${projectName}`)
         .digest('hex');
+
+    const token = {
+        username,
+        projectName,
+        signature,
+    }
+
+    return JSON.stringify(token);
 }
 
 module.exports = {
