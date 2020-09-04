@@ -4,11 +4,7 @@ const {getToken} = require('./token.js');
 const {getAuthToken, getUsernameFromToken} = require('./auth.js');
 
 /**
- * save the username to disk after authenticating so we don't have to ask over and over
- * add auth token once user is authenticated
  * 
- * make separate tokens for auth and project config
- * auth token is secret, project config token can be public maybe
  */
 
  const noAuthQuestions = [
