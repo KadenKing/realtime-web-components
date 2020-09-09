@@ -23,6 +23,7 @@ defmodule ServerWeb.Router do
     pipe_through :api
 
     get "/", ApiController, :index
+    post "/signToken", ApiController, :sign
   end
 
   # Other scopes may use custom stacks.
