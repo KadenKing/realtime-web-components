@@ -12,8 +12,7 @@ defmodule ServerWeb.ApiController do
   @spec sign(Plug.Conn.t(), map) :: Plug.Conn.t()
   def sign(conn, %{"username" => username, "projectName" => projectName}) do
     signature = :crypto.hmac(:sha256, @secret, username <> ":" <> projectName) |> Base.encode16
-
-    send_resp(conn, 201, signature)
+    json(conn, %{"username" => username, "projectName" => projectName, "signature" => signature})
   end
 
   def sign(conn, _) do

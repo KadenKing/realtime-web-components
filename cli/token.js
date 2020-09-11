@@ -1,19 +1,21 @@
 const crypto = require('crypto');
-
+const axios = require('axios');
 const SECRET = "SUPERSECRET";
 
-const getToken = (username, projectName) => {
-    const signature = crypto.createHmac('sha256', SECRET)
-        .update(`${username}:${projectName}`)
-        .digest('hex');
-
-    const token = {
+const getToken = async (username, projectName) => {
+    return axios
+    .post('http://localhost:4000/api/signToken', {
         username,
-        projectName,
-        signature,
-    }
+        projectName
+    })
+    .then ( res => {
+        return JSON.stringify(res.data)
+    })
+    .catch(error => {
+        console.error(error)
+    })
+    
 
-    return JSON.stringify(token);
 }
 
 module.exports = {

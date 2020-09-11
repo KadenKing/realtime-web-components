@@ -85,7 +85,7 @@ const handleProject = async () => {
     const answers = await inquirer.prompt(createProjectQuestions);
     const username = getUsernameFromToken();
 
-    const token = getToken(username, answers.projectName);
+    const token = await getToken(username, answers.projectName);
     fs.writeFileSync('project.txt', token);
 
 }
