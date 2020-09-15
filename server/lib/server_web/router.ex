@@ -26,6 +26,15 @@ defmodule ServerWeb.Router do
     post "/signToken", ApiController, :sign
   end
 
+  # pow router code
+  scope "/api", ServerWeb do
+    pipe_through :api
+
+    resources "/registration", RegistrationController, singleton: true, only: [:create]
+    # resources "/session", SessionController, singleton: true, only: [:create, :delete]
+    # post "/session/renew", SessionController, :renew
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", ServerWeb do
   #   pipe_through :api
