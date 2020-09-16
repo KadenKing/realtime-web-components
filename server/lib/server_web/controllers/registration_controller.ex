@@ -3,7 +3,7 @@ defmodule ServerWeb.RegistrationController do
 
   alias Ecto.Changeset
   alias Plug.Conn
-  alias MyAppWeb.ErrorHelpers
+  alias ServerWeb.ErrorHelpers
 
   @spec create(Conn.t(), map()) :: Conn.t()
   def create(conn, %{"user" => user_params}) do

@@ -11,6 +11,11 @@ defmodule ServerWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug ServerWeb.APIAuthPlug, otp_app: :server
+  end
+
+  pipeline :api_protected do
+    plug Pow.Plug.RequireAuthenticated, error_handler: ServerWeb.APIAuthErrorHandler
   end
 
   scope "/", ServerWeb do
@@ -33,6 +38,12 @@ defmodule ServerWeb.Router do
     resources "/registration", RegistrationController, singleton: true, only: [:create]
     # resources "/session", SessionController, singleton: true, only: [:create, :delete]
     # post "/session/renew", SessionController, :renew
+  end
+
+  scope "/", ServerWeb do
+    pipe_through [:api, :api_protected]
+
+    get "/protected", ApiController, :protected
   end
 
   # Other scopes may use custom stacks.
