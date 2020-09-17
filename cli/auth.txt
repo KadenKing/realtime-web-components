@@ -1,1 +1,1 @@
-{"username":"kaden","expiration":1600886727499,"signature":"2b0f8d99295acd4266ead9715354ff5b921e3352b62ea7f8fcc45d783452e079"}
+"{\"access_token\":\"SFMyNTY.MzEwMTAyNmMtZjUwZS00YTlmLWJjZjUtN2Y3MTI3MWViZTFk.Bf_f1czbKNqTvg7VMzwEY6WdNTZU4PZjdDlpzpTbTeE\",\"renewal_token\":\"SFMyNTY.NGY3MTA5ZmYtOWY3NC00OTliLThlMGMtYmI3YmU0YTg5YjA4.6fEUPeaaUahjD-8-EIgYhrODN-Glbav8421Nnz6Ibsw\"}"

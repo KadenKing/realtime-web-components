@@ -1,23 +1,15 @@
-const crypto = require('crypto');
 const fs = require('fs');
+const axios = require('axios')
 
-const SECRET = "SUPERSECRET";
-
-const getAuthToken = (username, password) => {
-    const now = new Date();
-    const expiration = now.setDate(now.getDate() + 14);
-
-    const signature = crypto.createHmac('sha256', SECRET)
-        .update(`${username}:${expiration.toString()}`)
-        .digest('hex');
-
-    const token = {
-        username,
-        expiration,
-        signature,
+const getAuthToken = async (email, password) => {
+    try {
+        const res = await axios.post('http://localhost:4000/api/session', {user: {email, password}})
+        const data = JSON.stringify(res.data.data);
+        return JSON.stringify(data)
+    } catch(e) {
+        console.log(`error: ${e}`)
     }
 
-    return JSON.stringify(token);
 }
 
 const getUsernameFromToken = () => {

@@ -36,8 +36,8 @@ defmodule ServerWeb.Router do
     pipe_through :api
 
     resources "/registration", RegistrationController, singleton: true, only: [:create]
-    # resources "/session", SessionController, singleton: true, only: [:create, :delete]
-    # post "/session/renew", SessionController, :renew
+    resources "/session", SessionController, singleton: true, only: [:create, :delete]
+    post "/session/renew", SessionController, :renew
   end
 
   scope "/", ServerWeb do

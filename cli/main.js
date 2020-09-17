@@ -4,7 +4,10 @@ const {getToken} = require('./token.js');
 const {getAuthToken, getUsernameFromToken} = require('./auth.js');
 
 /**
- * 
+ * rewrite this to be not a nightmare
+ * get username from auth token, user will have multiple projects
+ * try out the auth from the cli by accessing the protected endpoint
+ * handle renewing tokens silently
  */
 
  const noAuthQuestions = [
@@ -58,7 +61,7 @@ const createProjectQuestions = [
 const handleAuth = async () => {
     if (!fs.existsSync('auth.txt')){
         const {username, password} = await noAuth()
-        const tokenString = getAuthToken(username, password);
+        const tokenString = await getAuthToken(username, password);
         fs.writeFileSync('auth.txt', tokenString);
     }
 }
