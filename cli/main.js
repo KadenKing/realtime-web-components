@@ -1,7 +1,7 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const {getToken} = require('./token.js');
-const {getAuthToken, getUsernameFromToken} = require('./auth.js');
+const {getProtected} = require('./token.js');
+const {getAuthToken/*, getUsernameFromToken*/} = require('./auth.js');
 
 /**
  * rewrite this to be not a nightmare
@@ -58,6 +58,7 @@ const createProjectQuestions = [
     }, 
 ]
 
+
 const handleAuth = async () => {
     if (!fs.existsSync('auth.txt')){
         const {username, password} = await noAuth()
@@ -86,9 +87,9 @@ const noAuth = async () => {
 
 const handleProject = async () => {
     const answers = await inquirer.prompt(createProjectQuestions);
-    const username = getUsernameFromToken();
+    //const username = getUsernameFromToken();
 
-    const token = await getToken(username, answers.projectName);
+    const token = await getProtected();
     fs.writeFileSync('project.txt', token);
 
 }
