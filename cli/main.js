@@ -1,7 +1,11 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const {getProtected} = require('./token.js');
-const {getAuthToken/*, getUsernameFromToken*/} = require('./auth.js');
+const {attemptLogin/*, getUsernameFromToken*/} = require('./auth.js');
+
+/**
+ * manual retrying is a nightmare use https://www.npmjs.com/package/axios-retry
+ */
 
 /**
  * rewrite this to be not a nightmare
@@ -59,12 +63,19 @@ const createProjectQuestions = [
 ]
 
 
+
 const handleAuth = async () => {
     if (!fs.existsSync('auth.txt')){
-        const {username, password} = await noAuth()
-        const tokenString = await getAuthToken(username, password);
+
+        const tokenString = await attemptLogin();
+
         fs.writeFileSync('auth.txt', tokenString);
+        
+        return JSON.parse(tokenString);
     }
+
+    const tokenString = fs.readFileSync('auth.txt').toString();
+    return JSON.parse(tokenString);
 }
 
 const noAuth = async () => {
@@ -94,7 +105,18 @@ const handleProject = async () => {
 
 }
 
+/** rewrite */
 handleAuth()
-.then(() => {
-    handleProject()
+.then((token) => {
+    console.log({token})
 })
+.catch(e => {
+    console.log({e});
+})
+
+/*********** */
+
+// handleAuth()
+// .then(() => {
+//     handleProject()
+// })
