@@ -1,6 +1,6 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const {getProtected} = require('./token.js');
+const {newProject} = require('./token.js');
 const {attemptLogin/*, getUsernameFromToken*/} = require('./auth.js');
 
 /**
@@ -14,55 +14,14 @@ const {attemptLogin/*, getUsernameFromToken*/} = require('./auth.js');
  * handle renewing tokens silently
  */
 
- const noAuthQuestions = [
-     {
-         type: 'confirm',
-         name: 'hasAccount',
-         message: 'Do you already have an account?',
-         default: false,
-     },
- ];
-
-const noAccountQuestions = [
+const whatDo = [
     {
-        type: 'input',
-        name: 'username',
-        message: 'What is your desired username?',
-    },
-    {
-        type: 'password',
-        name: 'password',
-        message: 'What is your desired password?',
-    },
-    {
-        type: 'password',
-        name: 'confirmPassword',
-        message: 'Confirm password',
-    },
-];
-
-const hasAccountLogin = [
-    {
-        type: 'input',
-        name: 'username',
-        message: 'What is your username?',
-    },
-    {
-        type: 'password',
-        name: 'password',
-        message: 'What is your password?',
-    },
-];
-
-const createProjectQuestions = [
-    {
-        type: 'input',
-        name: 'projectName',
-        message: 'What is the name of your project?',
-    }, 
+        type: 'list',
+        name: 'whatDo',
+        message: 'What do you want to do?',
+        choices: ['Manage an existing project', 'Create a new project', 'Manage my account'],
+    }
 ]
-
-
 
 const handleAuth = async () => {
     if (!fs.existsSync('auth.txt')){
@@ -78,37 +37,18 @@ const handleAuth = async () => {
     return JSON.parse(tokenString);
 }
 
-const noAuth = async () => {
-    const answers = await inquirer.prompt(noAuthQuestions);
-    if (!answers.hasAccount) {
-        const signupAnswers = await inquirer.prompt(noAccountQuestions);
-
-        return {
-            username: signupAnswers.username, 
-            password: signupAnswers.password,
-        }
-    }
-
-    const loginAnswers = await inquirer.prompt(hasAccountLogin);
-    return {
-        username: loginAnswers.username,
-        password: loginAnswers.password,
-    }
-}
-
-const handleProject = async () => {
-    const answers = await inquirer.prompt(createProjectQuestions);
-    //const username = getUsernameFromToken();
-
-    const token = await getProtected();
-    fs.writeFileSync('project.txt', token);
-
-}
 
 /** rewrite */
 handleAuth()
 .then((token) => {
-    console.log({token})
+    return inquirer.prompt(whatDo)
+})
+.then(async (answers) => {
+    const choice = answers.whatDo;
+    if (choice === "Create a new project") {
+        const resp = await newProject()
+        console.log(resp);
+    }
 })
 .catch(e => {
     console.log({e});
