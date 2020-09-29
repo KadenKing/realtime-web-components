@@ -1,5 +1,6 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
+const promiseRetry = require('promise-retry');
 
 const axios = require('axios')
 
@@ -61,39 +62,24 @@ const noAuth = async () => {
     }
 }
 
-// Add a response interceptor
-axios.interceptors.response.use(function (response) {
-    // Any status code that lie within the range of 2xx cause this function to trigger
-    // Do something with response data
-    return response;
-  }, function (error) {
-    return attemptLogin();
-    // return Promise.reject(error);
-  });
-
 const getAuthToken = async (email, password) => {
-    try {
-        const res = await axios.post('http://localhost:4000/api/session', {user: {email, password}})
-        const data = JSON.stringify(res.data.data);
-        return data
-    } catch(e) {
-        console.log(`error: ${e}`)
-    }
-
+    const res = await axios.post('http://localhost:4000/api/session', {user: {email, password}})
+    const data = JSON.stringify(res.data.data);
+    return data
 }
 
 const attemptLogin = async () => {
-    const {username, password} = await noAuth();
-    const token = await getAuthToken(username, password);
-    return token
+    return promiseRetry({retries: 2}, async (retry, number) => {
+        try {
+            const {username, password} = await noAuth();
+            const token = await getAuthToken(username, password);
+            return token
+        } catch(e) {
+            retry(e);
+        }
+    })
 }
 
-// const getUsernameFromToken = () => {
-//     const str = fs.readFileSync('auth.txt');
-//     const token = JSON.parse(str);
-
-//     return token.username;
-// }
 
 module.exports = {
     attemptLogin/*,
