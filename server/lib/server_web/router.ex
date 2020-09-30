@@ -43,7 +43,7 @@ defmodule ServerWeb.Router do
   scope "/", ServerWeb do
     pipe_through [:api, :api_protected]
 
-    get "/protected", ApiController, :protected
+    resources "/projects", ProjectController
   end
 
   # Other scopes may use custom stacks.

@@ -75,13 +75,12 @@ const attemptLogin = async () => {
             const token = await getAuthToken(username, password);
             return token
         } catch(e) {
+            console.log('Could not log in, please try again')
             retry(e);
         }
     })
 }
 
-
 module.exports = {
-    attemptLogin/*,
-    getUsernameFromToken,*/
+    attemptLogin
 }
