@@ -6,5 +6,7 @@ defmodule Server.Users.User do
     pow_user_fields()
 
     timestamps()
+    has_many :project, Server.Projects.Project
+
   end
 end
