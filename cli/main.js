@@ -2,6 +2,7 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 const {newProject} = require('./token.js');
 const {attemptLogin/*, getUsernameFromToken*/} = require('./auth.js');
+const {getProjects} = require('./requests.js')
 
 /**
  * manual retrying is a nightmare use https://www.npmjs.com/package/axios-retry
@@ -28,7 +29,7 @@ const handleAuth = async () => {
 
         const tokenString = await attemptLogin();
 
-        fs.writeFileSync('auth.txt', tokenString);
+       
         
         return JSON.parse(tokenString);
     }
@@ -48,6 +49,9 @@ handleAuth()
     if (choice === "Create a new project") {
         const resp = await newProject()
         console.log(resp);
+    } else if (choice === "Manage an existing project") {
+        const projects = await getProjects()
+        console.log(projects)
     }
 })
 .catch(e => {

@@ -73,6 +73,7 @@ const attemptLogin = async () => {
         try {
             const {username, password} = await noAuth();
             const token = await getAuthToken(username, password);
+            fs.writeFileSync('auth.txt', token);
             return token
         } catch(e) {
             console.log('Could not log in, please try again')
