@@ -15,5 +15,6 @@ defmodule Server.Projects.Project do
       |> cast(params, [:name, :user_id])
       |> validate_required([:name, :user_id])
       |> unique_constraint(:name, name: :users_name_user_id_index)
+      |> foreign_key_constraint(:user_id)
   end
 end
