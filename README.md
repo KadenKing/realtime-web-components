@@ -2,7 +2,9 @@
 
 ### prereqs
 
-install phoenix `mix archive.install hex phx_new 1.5.4`
+Install elixir to enable mix (using homebrew on mac) `brew install elixer`
+
+Install phoenix `mix archive.install hex phx_new 1.5.4`
 
 Install and have postgres running with username `postgres`, password `postgres`
 
