@@ -51,9 +51,25 @@ handleAuth()
         console.log(resp);
     } else if (choice === "Manage an existing project") {
         const projects = await getProjects()
-        console.log(projects)
+        const questionText = 'Which project do you want to manage?'
+        const question = {
+            type: 'list',
+            name: questionText,
+            choices: projects,
+        }
+        const ans = await inquirer.prompt(question);
+        const selectedProject = projects.find(project => project.name === ans[questionText])
+        
+        const config = {
+            ...selectedProject
+        }
+
+        const configString = JSON.stringify(config, undefined, 2)
+
+        console.log(`Your client configuration: \n\n${configString}`)
     }
 })
+
 .catch(e => {
     console.log({e});
 })

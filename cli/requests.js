@@ -2,22 +2,6 @@ const axios = require('axios');
 const fs = require('fs');
 const { attemptLogin } = require('./auth');
 
-// const newProject = async () => {
-//     let token = JSON.parse(fs.readFileSync('auth.txt').toString())["access_token"]
-//     return axios
-//     .get('http://localhost:4000/projects',{
-//         headers: {
-//             'Authorization': token
-//           }
-//     })
-//     .then ( res => {
-//         return JSON.stringify(res.data)
-//     })
-//     .catch(error => {
-//         console.error(error)
-//     })
-// }
-
 const getTokenFromFile = () => {
     return JSON.parse(fs.readFileSync('auth.txt').toString())
 }
