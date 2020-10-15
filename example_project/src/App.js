@@ -23,7 +23,6 @@ const useChannel = (channelName) => {
         setChannel(channel);
      })
       .receive("error", resp => { console.log("Unable to join", resp) })
-
       return () => {
         channel.leave()
       }
@@ -35,14 +34,23 @@ const useChannel = (channelName) => {
 
 function App() {
   const [channel] = useChannel('room:lobby');
-  const [resp, setResp] = useState();
+  const [text, setText] = useState();
+
+  const textChange = (e) => {
+    setText(e.target.value)
+    channel.push("new_msg", {body: e.target.value})
+  }
 
   useEffect(() => {
     if (!channel) {
       return
     }
 
-    
+    channel.on("new_msg", payload => {
+      setText(payload.body)
+    })
+
+
   }, [channel])
 
   return (
@@ -50,6 +58,7 @@ function App() {
       <div className="App">
         <header className="App-header">
           {channel && JSON.stringify(channel.data)}
+          <input onChange={textChange} type="text" value={text}></input>
         </header>
       </div>
   );

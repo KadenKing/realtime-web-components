@@ -2,8 +2,7 @@ defmodule ServerWeb.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "room:*", ServerWeb.RoomChannel
-
+  channel "room:*", ServerWeb.RoomChannel
   # Socket params are passed from the client and can
   # be used to verify and authenticate a user. After
   # verification, you can put default assigns into
@@ -32,4 +31,21 @@ defmodule ServerWeb.UserSocket do
   # Returning `nil` makes this socket anonymous.
   @impl true
   def id(_socket), do: nil
+end
+
+defmodule ServerWeb.RoomChannel do
+  use Phoenix.Channel
+
+  def join("room:lobby", _message, socket) do
+    response = %{hey: 'hello'}
+    {:ok, response, socket}
+  end
+  def join("room:" <> _private_room_id, _params, _socket) do
+    {:error, %{reason: "unauthorized"}}
+  end
+
+  def handle_in("new_msg", %{"body" => body}, socket) do
+    broadcast!(socket, "new_msg", %{body: body})
+    {:noreply, socket}
+  end
 end

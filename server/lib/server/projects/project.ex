@@ -3,7 +3,7 @@ defmodule Server.Projects.Project do
   use Pow.Ecto.Schema
   import Ecto.Changeset
 
-  @derive {Jason.Encoder, only: [:name, :user_id]}
+  @derive {Jason.Encoder, only: [:id, :name, :user_id]}
   @primary_key {:id, :binary_id, autogenerate: true}
   schema "project" do
     field :name, :string
