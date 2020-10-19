@@ -3,10 +3,17 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import {RTContext} from './rtInit'
+
+const config = {
+  projectID: "abc123"
+}
 
 ReactDOM.render(
   <React.StrictMode>
+    <RTContext.Provider value={config}>
     <App />
+    </RTContext.Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

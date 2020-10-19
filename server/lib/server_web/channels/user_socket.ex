@@ -36,12 +36,11 @@ end
 defmodule ServerWeb.RoomChannel do
   use Phoenix.Channel
 
-  def join("room:lobby", _message, socket) do
+  @spec join(<<_::40, _::_*8>>, any, any) ::
+          {:error, %{reason: <<_::96>>}} | {:ok, %{hey: [101 | 104 | 108 | 111, ...]}, any}
+  def join("room:" <> lobby, _message, socket) do
     response = %{hey: 'hello'}
     {:ok, response, socket}
-  end
-  def join("room:" <> _private_room_id, _params, _socket) do
-    {:error, %{reason: "unauthorized"}}
   end
 
   def handle_in("new_msg", %{"body" => body}, socket) do

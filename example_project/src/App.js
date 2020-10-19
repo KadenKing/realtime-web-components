@@ -1,64 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import {useChannel} from './realtime.js'
-// const { Socket } = require('phoenix-channels')
- 
-// let socket = new Socket("ws://localhost:4000/socket")
- 
-// socket.connect()
- 
-// Now that you are connected, you can join channels with a topic:
-
-
-
-// const useChannel = (channelName) => {
-//   const [channel, setChannel] = useState();
-
-//   useEffect(() => {
-//     let channel = socket.channel(channelName, {})
-//     channel.join()
-//       .receive("ok", resp => { 
-//         console.log("Joined successfully", resp)
-//         setChannel(channel);
-//      })
-//       .receive("error", resp => { console.log("Unable to join", resp) })
-//       return () => {
-//         channel.leave()
-//       }
-//   }, [])
-
-//     return [channel]
-
-// }
+import LikeCounter from './NumericInput/LikeCounter';
+import RTTextArea from './TextInput/RTTextArea';
+import RTTextInput from './TextInput/RTTextInput'
 
 function App() {
-  const [channel] = useChannel('room:lobby');
-  const [text, setText] = useState();
-
-  const textChange = (e) => {
-    setText(e.target.value)
-    channel.push("new_msg", {body: e.target.value})
-  }
-
-  useEffect(() => {
-    if (!channel) {
-      return
-    }
-
-    channel.on("new_msg", payload => {
-      setText(payload.body)
-    })
-
-
-  }, [channel])
-
   return (
 
       <div className="App">
         <header className="App-header">
-          {channel && JSON.stringify(channel.data)}
-          <input onChange={textChange} type="text" value={text}></input>
+          <RTTextInput id="text1"></RTTextInput>
+          <RTTextInput id="text2"></RTTextInput>
+          <RTTextArea id="text2"></RTTextArea>
+          <LikeCounter id="like1"></LikeCounter>
         </header>
       </div>
   );
