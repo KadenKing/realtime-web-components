@@ -1,5 +1,5 @@
-import React, { useContext } from 'react'
-import { useRealtimeText } from '../hooks/realtime';
+import React from 'react'
+import {useRealtimeText} from '../hooks/realtime'
 
 const RTTextInput = ({id}) => {
     const [text, setText] = useRealtimeText(`textinput:${id}`, "")
