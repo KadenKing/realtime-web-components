@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-// import {RTContext} from './libtest'
+import {RTContext} from 'cra-rtc/dist/rtInit'
 
 const config = {
   projectID: "abc123"
@@ -11,9 +11,9 @@ const config = {
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <RTContext.Provider value={config}> */}
+    <RTContext.Provider value={config}>
     <App />
-    {/* </RTContext.Provider> */}
+    </RTContext.Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -1,11 +1,12 @@
 {
   "name": "cra-rtc",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": false,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.5",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "phoenix-channels": "^1.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.0",
@@ -21,7 +22,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "publish:npm": "rm -rf dist && mkdir dist &&  babel src/component -d dist --copy-files"
+    "publish:npm": "rm -rf dist && mkdir dist &&  babel src/ -d dist --copy-files"
   },
   "eslintConfig": {
     "extends": [

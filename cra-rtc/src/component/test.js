@@ -1,5 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-const Test = () => (<div>howdy</div>)
+const Test = () => {
+    const [state, setState] = useState('howdyyyy')
+
+    return (
+        <div>
+            {state}
+        </div>
+    )
+}
 
 export default Test

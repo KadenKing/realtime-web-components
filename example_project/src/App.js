@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import Test from 'cra-rtc/dist/test'
+// import RTTextInput from 'cra-rtc/dist/TextInput/RTTextInput'
+import Test from 'cra-rtc/dist/component/test'
+
 // import RTTextInput from 'realtime-components'
 
 function App() {
