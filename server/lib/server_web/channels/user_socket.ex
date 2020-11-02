@@ -36,11 +36,10 @@ end
 defmodule ServerWeb.RoomChannel do
   use Phoenix.Channel
 
-  @spec join(<<_::40, _::_*8>>, any, any) ::
-          {:error, %{reason: <<_::96>>}} | {:ok, %{hey: [101 | 104 | 108 | 111, ...]}, any}
-  def join("room:" <> lobby, _message, socket) do
-    response = %{hey: 'hello'}
-    {:ok, response, socket}
+  def join(key="room:" <> lobby, _message, socket) do
+    {:ok, current_val} = Redix.command(:redix, ["GET", key])
+
+    {:ok, current_val, socket}
   end
 
   def handle_in("new_msg", %{"body" => body}, socket) do

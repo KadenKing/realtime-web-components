@@ -13,6 +13,14 @@ defmodule Server.Application do
       ServerWeb.Telemetry,
       # Start the PubSub system
       {Phoenix.PubSub, name: Server.PubSub},
+      # {Redix, [host: "localhost", port: 6379], [name: :redix]},
+      %{
+        id: MyAppA.Redix,
+        start: {Redix, :start_link, ["redis://localhost:6379", [name: :redix]]},
+        # restart: :permanent,
+        # shutdown: 5_000,
+        # type: :worker
+      },
       # Start the Endpoint (http/https)
       ServerWeb.Endpoint
       # Start a worker by calling: Server.Worker.start_link(arg)

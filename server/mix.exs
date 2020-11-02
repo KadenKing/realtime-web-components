@@ -45,7 +45,9 @@ defmodule Server.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:pow, "~> 1.0.21"}
+      {:pow, "~> 1.0.21"},
+      {:redix, ">= 0.0.0"},
+      {:castore, ">= 0.0.0"}
     ]
   end
 
