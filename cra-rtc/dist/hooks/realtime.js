@@ -45,7 +45,6 @@ const useRealtimeText = (id, initialValue) => {
       return;
     }
 
-    alert('hey');
     channel.on("new_msg", payload => {
       setStateText(payload.body);
     });
@@ -55,7 +54,6 @@ const useRealtimeText = (id, initialValue) => {
       return;
     }
 
-    alert('happens');
     setStateText(val);
   }, [val]);
   return [text, setText];

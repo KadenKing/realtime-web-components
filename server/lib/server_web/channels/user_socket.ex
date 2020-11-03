@@ -43,6 +43,7 @@ defmodule ServerWeb.RoomChannel do
   end
 
   def handle_in("new_msg", %{"body" => body}, socket) do
+    {:ok, _val} = Redix.command(:redix, ["SET", socket.topic, body])
     broadcast!(socket, "new_msg", %{body: body})
     {:noreply, socket}
   end
