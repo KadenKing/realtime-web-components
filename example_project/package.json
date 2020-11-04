@@ -7,10 +7,11 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "cra-rtc": "0.0.2",
+    "jsonwebtoken": "^8.5.1",
     "phoenix-channels": "^1.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-scripts": "3.4.3",
+    "react-scripts": "4.0.0",
     "use-phoenix-channel": "^1.1.1"
   },
   "scripts": {
@@ -21,7 +22,7 @@
   },
   "eslintConfig": {
     "extends": "react-app"
-  },  
+  },
   "browserslist": {
     "production": [
       ">0.2%",
