@@ -5,7 +5,8 @@ const {
   Socket
 } = require('phoenix-channels');
 
-let socket = new Socket("ws://localhost:4000/socket");
+let socket = new Socket("ws://157.230.236.37:4000/socket");
+
 socket.connect();
 
 const useChannel = channelName => {

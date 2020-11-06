@@ -12,9 +12,13 @@ defmodule ServerWeb.ProjectController do
 
     query = from(u in User, select: u, join: p in Project, on: u.id == p.user_id, where: u.id == ^user_id, preload: [project: p])
 
-    %User{project: projects} = Server.Repo.one(query)
+    case Server.Repo.one(query) do
+      %User{project: projects} -> json(conn, projects)
+      _ -> json(conn, [])
+    end
+    # %User{project: projects} = Server.Repo.one(query)
 
-    json(conn, projects)
+    # json(conn, projects)
   end
 
   @spec create(Plug.Conn.t(), map) :: Plug.Conn.t()

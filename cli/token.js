@@ -4,7 +4,7 @@ const fs = require('fs');
 const newProject = async () => {
     let token = JSON.parse(fs.readFileSync('auth.txt').toString())["access_token"]
     return axios
-    .get('http://localhost:4000/projects',{
+    .get('http://157.230.236.37:4000/projects',{
         headers: {
             'Authorization': token
           }

@@ -49,6 +49,7 @@ const noAuth = async () => {
     if (!answers.hasAccount) {
         const signupAnswers = await inquirer.prompt(noAccountQuestions);
 
+        const rest = await axios.post('http://157.230.236.37:4000/api/registration', {user: {email: signupAnswers.username, password: signupAnswers.password, password_confirmation: signupAnswers.password}})
         return {
             username: signupAnswers.username, 
             password: signupAnswers.password,
@@ -63,7 +64,7 @@ const noAuth = async () => {
 }
 
 const getAuthToken = async (email, password) => {
-    const res = await axios.post('http://localhost:4000/api/session', {user: {email, password}})
+    const res = await axios.post('http://157.230.236.37:4000/api/session', {user: {email, password}})
     const data = JSON.stringify(res.data.data);
     return data
 }
