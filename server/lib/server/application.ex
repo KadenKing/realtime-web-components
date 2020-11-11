@@ -16,7 +16,8 @@ defmodule Server.Application do
       # {Redix, [host: "localhost", port: 6379], [name: :redix]},
       %{
         id: MyAppA.Redix,
-        start: {Redix, :start_link, ["redis://localhost:6379", [name: :redix]]},
+        start: {Redix, :start_link, ["redis://127.0.0.1:6379", [name: :redix]]}, #"redis://localhost:6379"
+
         # restart: :permanent,
         # shutdown: 5_000,
         # type: :worker

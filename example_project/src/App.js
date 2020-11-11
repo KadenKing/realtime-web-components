@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import RTTextInput from 'cra-rtc/dist/TextInput/RTTextInput'
+//import RTTextInput from 'cra-rtc/dist/TextInput/RTTextInput'
+import RTTextInputCopy from './RTTextInputCopy'
+import RTDraw from './RTDraw'
 import jwt from 'jsonwebtoken'
-
+import CanvasDraw from "react-canvas-draw";
 /**
 
 request that goes to developer's own server
@@ -21,7 +23,8 @@ function App() {
       <div className="App">
         <header className="App-header">
           {JSON.stringify(token)}
-          <RTTextInput id="text1"></RTTextInput>
+          <RTTextInputCopy id="text1"></RTTextInputCopy>
+          <RTDraw id="draw1"/>
         </header>
       </div>
   );
