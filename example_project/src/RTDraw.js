@@ -25,6 +25,9 @@ const RTDraw = ({id}) => {
         ref = {canvasDraw => (ref = canvasDraw)}
         saveData = {text}
         immediateLoading = {true}/>
+        <button onClick={() => {ref.clear(); onTextChange()}}>
+            clear
+        </button>
         
     </div>
     )
