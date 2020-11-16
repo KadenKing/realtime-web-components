@@ -22,7 +22,7 @@ config :logger, level: :info
 # to the previous section and set your `:url` port to 443:
 #
     config :server, ServerWeb.Endpoint,
-      url: [host: "realtimewebcomponents.com", port: 443],
+      url: [host: "realtimewebcomponents.com", port: 4001],
       https: [
         port: 443,
         cipher_suite: :strong,
