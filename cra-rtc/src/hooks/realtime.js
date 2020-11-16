@@ -3,7 +3,7 @@ import {RTContext} from '../rtInit'
 
 const { Socket } = require('phoenix-channels')
  
-let socket = new Socket("ws://157.230.236.37:4000/socket")
+let socket = new Socket("wss://realtimewebcomponents.com:4001/socket")
  
 socket.connect()
 
