@@ -5,17 +5,12 @@ import {useRealtimeText} from 'cra-rtc/dist/hooks/realtime'
 const RTDraw = ({id}) => {
     var ref = undefined
     const [text, setText] = useRealtimeText(`textinput:${id}`, "")
-    //const [drawData, setDrawData] = useState()
+
     const onTextChange = () => {
         if (ref === undefined) {return}
         const drawText = ref.getSaveData()
         setText(drawText)
     }
-    /*useEffect(() => {
-        if (!text) {return}
-        ref.loadSaveData(text, true)
-        
-    }, [text])*/
 
     return (
 
