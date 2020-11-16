@@ -26,8 +26,8 @@ config :logger, level: :info
       https: [
         port: 443,
         cipher_suite: :strong,
-        keyfile: "/etc/letsencrypt/live/realtimewebcomponents.com/privkey.pem",
-        certfile: "/etc/letsencrypt/live/realtimewebcomponents.com/fullchain.pem",
+        keyfile: "/home/project/realtime-web-components/server/priv/key/privkey.pem",
+        certfile: "/home/project/realtime-web-components/server/priv/key/fullchain.pem",
         transport_options: [socket_opts: [:inet6]]
       ]
 #
