@@ -10,7 +10,7 @@ config :server, Server.Repo,
   pool_size: 10
 
 # For development, we disable any cache and enable
-# debugging and code reloading.
+# debugging and cod ereloading.
 #
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
