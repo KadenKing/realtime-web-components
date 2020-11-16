@@ -23,6 +23,7 @@ config :logger, level: :info
 #
     config :server, ServerWeb.Endpoint,
       url: [host: "realtimewebcomponents.com", port: 4001],
+      check_origin: false,
       https: [
         port: 4001,
         cipher_suite: :strong,
