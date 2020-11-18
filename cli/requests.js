@@ -1,4 +1,4 @@
-const axios = require('axios');
+const axios = require('./axiosInstance');
 const fs = require('fs');
 const { attemptLogin } = require('./auth');
 
@@ -17,7 +17,7 @@ const axiosRequest = async (method, url, data) => {
         return await axios({method, url, data, headers: createAuthHeader(token.access_token)})
     } catch(e) {
         try {
-            const resp = await axios.post('http://157.230.236.37:4000/api/session/renew', {}, createAuthHeader(token.renewal_token))
+            const resp = await axios.post('/api/session/renew', {}, createAuthHeader(token.renewal_token))
             fs.writeFileSync('auth.txt', JSON.stringify(resp.data.data))
             return await axios({method, url, data, headers: createAuthHeader(resp.data.data.access_token)})
         } catch(e2) {
@@ -29,7 +29,7 @@ const axiosRequest = async (method, url, data) => {
 }
 
 const getProjects = async () => {
-    const resp = await axiosRequest('get','http://157.230.236.37:4000/projects', {})
+    const resp = await axiosRequest('get','/projects', {})
     return resp.data
 }
 

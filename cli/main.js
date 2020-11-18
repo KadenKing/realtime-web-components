@@ -3,6 +3,7 @@ const fs = require('fs');
 const {newProject} = require('./token.js');
 const {attemptLogin/*, getUsernameFromToken*/} = require('./auth.js');
 const {getProjects} = require('./requests.js')
+const {getTokenFromDisk} = require('./storeToken.js')
 
 /**
  * manual retrying is a nightmare use https://www.npmjs.com/package/axios-retry
@@ -20,7 +21,7 @@ const whatDo = [
         type: 'list',
         name: 'whatDo',
         message: 'What do you want to do?',
-        choices: ['Manage an existing project', 'Create a new project', 'Manage my account'],
+        choices: ['Manage an existing project', 'Create a new project', 'Manage my account', new inquirer.Separator(), 'Quit'],
     }
 ]
 
@@ -34,45 +35,56 @@ const handleAuth = async () => {
         return JSON.parse(tokenString);
     }
 
-    const tokenString = fs.readFileSync('auth.txt').toString();
-    return JSON.parse(tokenString);
+    return getTokenFromDisk();
 }
 
+const start = async () => {
+    handleAuth()
+    .then((token) => {
+        return inquirer.prompt(whatDo)
+    })
+    .then(async (answers) => {
+        const choice = answers.whatDo;
+        if (choice === "Create a new project") {
+    
+            const resp = await newProject()
+    
+        } else if (choice === "Manage an existing project") {
+            const projects = await getProjects()
+            const questionText = 'Which project do you want to manage?'
+            const question = {
+                type: 'list',
+                name: questionText,
+                choices: [...projects, new inquirer.Separator(), {name : 'return to main menu'}],
+            }
+            const ans = await inquirer.prompt(question);
 
-/** rewrite */
-handleAuth()
-.then((token) => {
-    return inquirer.prompt(whatDo)
-})
-.then(async (answers) => {
-    const choice = answers.whatDo;
-    if (choice === "Create a new project") {
-        const resp = await newProject()
-        console.log(resp);
-    } else if (choice === "Manage an existing project") {
-        const projects = await getProjects()
-        const questionText = 'Which project do you want to manage?'
-        const question = {
-            type: 'list',
-            name: questionText,
-            choices: projects,
+            if (ans[questionText] === 'return to main menu') {
+                return;
+            }
+
+            const selectedProject = projects.find(project => project.name === ans[questionText])
+            
+            const config = {
+                ...selectedProject
+            }
+    
+            const configString = JSON.stringify(config, undefined, 2)
+    
+            console.log(`Your client configuration: \n\n${configString}\n\n`)
+        } else if (choice === "Quit") {
+            process.exit(0);
         }
-        const ans = await inquirer.prompt(question);
-        const selectedProject = projects.find(project => project.name === ans[questionText])
-        
-        const config = {
-            ...selectedProject
-        }
+    })
+    .then(async () => {
+        await start();
+    })
+    .catch(e => {
+        console.log({e});
+    })
+}
 
-        const configString = JSON.stringify(config, undefined, 2)
-
-        console.log(`Your client configuration: \n\n${configString}`)
-    }
-})
-
-.catch(e => {
-    console.log({e});
-})
+start();
 
 /*********** */
 
