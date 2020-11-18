@@ -29,6 +29,7 @@ config :logger, level: :info
         cipher_suite: :strong,
         keyfile: "/home/project/realtime-web-components/server/priv/key/privkey.pem",
         certfile: "/home/project/realtime-web-components/server/priv/key/fullchain.pem",
+        cacertfile: "/home/project/realtime-web-components/server/priv/key/fullchain.pem",
         transport_options: [socket_opts: [:inet6]]
       ]
 #
