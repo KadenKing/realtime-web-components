@@ -1,6 +1,6 @@
 {
-  "name": "rtc",
-  "version": "1.0.0",
+  "name": "rtwc",
+  "version": "0.0.6",
   "description": "real time components",
   "main": "main.js",
   "scripts": {
@@ -15,5 +15,8 @@
     "promise-retry": "^2.0.1",
     "yargs": "^15.4.1"
   },
-  "bin": "./main.js"
+  "bin": {
+    "rtwc": "main.js"
+  },
+  "devDependencies": {}
 }
