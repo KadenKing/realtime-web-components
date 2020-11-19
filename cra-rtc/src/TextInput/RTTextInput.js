@@ -1,8 +1,8 @@
 import React from 'react'
-import {useRealtimeText} from '../hooks/realtime'
+import {useRealtimeData} from '../hooks/realtime'
 
-const RTTextInput = ({id}) => {
-    const [text, setText] = useRealtimeText(`textinput:${id}`, "")
+const RTTextInput = ({id, ...rest}) => {
+    const [text, setText] = useRealtimeData(`textinput:${id}`)
 
     const onTextChange = e => {
         setText(e.target.value)
@@ -10,7 +10,7 @@ const RTTextInput = ({id}) => {
 
     return (
     <div>
-        <input type="text" value={text} onChange={onTextChange}></input>
+        <input {...rest} type="text" value={text} onChange={onTextChange}></input>
     </div>
     )
 }

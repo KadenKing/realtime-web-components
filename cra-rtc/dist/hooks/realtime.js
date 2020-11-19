@@ -27,7 +27,7 @@ const useChannel = channelName => {
   return [channel, value];
 };
 
-const useRealtimeText = (id, initialValue) => {
+const useRealtimeData = id => {
   const context = useContext(RTContext);
   const [channel, val] = useChannel(`room:${context.projectID}:${id}`);
   const [text, setStateText] = useState();
@@ -59,4 +59,4 @@ const useRealtimeText = (id, initialValue) => {
   return [text, setText];
 };
 
-export { useRealtimeText };
+export { useRealtimeData };

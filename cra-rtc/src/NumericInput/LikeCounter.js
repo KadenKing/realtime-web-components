@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
-import { useRealtimeText } from '../hooks/realtime'
+import { useRealtimeData } from '../hooks/realtime'
 
 
-const LikeCounter = ({id}) => {
-    const [likes, setLikes] = useRealtimeText(`likecounter:${id}`, 0)
+const LikeCounter = ({id, ...rest}) => {
+    const [likes, setLikes] = useRealtimeData(`likecounter:${id}`)
 
     const incLikes = e => {
         setLikes(likes+1)
@@ -14,7 +14,7 @@ const LikeCounter = ({id}) => {
     }
 
     return (
-    <div>
+    <div {...rest}>
         <div style={{display: 'flex'}}>
             <div onClick={incLikes}>
                 👍

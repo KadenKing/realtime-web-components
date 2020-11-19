@@ -1,10 +1,10 @@
 import React,{useEffect, useState} from 'react'
 import CanvasDraw from "react-canvas-draw";
-import {useRealtimeText} from 'cra-rtc/dist/hooks/realtime'
+import { useRealtimeData } from 'cra-rtc/dist/hooks/realtime';
 
 const RTDraw = ({id}) => {
     var ref = undefined
-    const [text, setText] = useRealtimeText(`textinput:${id}`, "")
+    const [text, setText] = useRealtimeData(`textinput:${id}`)
 
     const onTextChange = () => {
         if (ref === undefined) {return}

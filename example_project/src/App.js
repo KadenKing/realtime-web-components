@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 //import RTTextInput from 'cra-rtc/dist/TextInput/RTTextInput'
-import RTTextInputCopy from './RTTextInputCopy'
+import RTTextInput from 'cra-rtc/dist/TextInput/RTTextInput'
 import RTDraw from './RTDraw'
 import jwt from 'jsonwebtoken'
 import CanvasDraw from "react-canvas-draw";
@@ -23,7 +23,7 @@ function App() {
       <div className="App">
         <header className="App-header">
           {JSON.stringify(token)}
-          <RTTextInputCopy id="text1"></RTTextInputCopy>
+          <RTTextInput style={{marginBottom: "200px"}} id="text1"></RTTextInput>
           <RTDraw id="draw1"/>
         </header>
       </div>

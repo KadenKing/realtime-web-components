@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { useRealtimeText } from '../hooks/realtime';
+import { useRealtimeData } from '../hooks/realtime';
 
 const LikeCounter = ({
-  id
+  id,
+  ...rest
 }) => {
-  const [likes, setLikes] = useRealtimeText(`likecounter:${id}`, 0);
+  const [likes, setLikes] = useRealtimeData(`likecounter:${id}`);
 
   const incLikes = e => {
     setLikes(likes + 1);
@@ -14,7 +15,7 @@ const LikeCounter = ({
     setLikes(likes === 0 ? likes : likes - 1);
   };
 
-  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+  return /*#__PURE__*/React.createElement("div", rest, /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex'
     }
