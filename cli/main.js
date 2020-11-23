@@ -33,27 +33,28 @@ const whatDo = [
 ]
 
 /**
- * 
+ * check if user is authenticated
  */
 const handleAuth = async () => {
     if (!fs.existsSync(`${dir}/auth.txt`)){
 
         const tokenString = await attemptLogin();
 
-       
-        
         return JSON.parse(tokenString);
     }
 
     return getTokenFromDisk();
 }
 
+/**
+ * command line interface menu loop
+ */
 const start = async () => {
-    handleAuth()
-    .then((token) => {
+    handleAuth() //first check if user is authenticated. if not, get user authenticated
+    .then((token) => { //then prompt user with main menu options
         return inquirer.prompt(whatDo)
     })
-    .then(async (answers) => {
+    .then(async (answers) => { //respond based on option picked
         const choice = answers.whatDo;
         if (choice === "Create a new project") {
     
@@ -86,7 +87,7 @@ const start = async () => {
             process.exit(0);
         }
     })
-    .then(async () => {
+    .then(async () => { //repeat menu loop
         await start();
     })
     .catch(e => {
@@ -94,7 +95,7 @@ const start = async () => {
     })
 }
 
-start();
+start(); // command line interface main menu loop entry
 
 /*********** */
 
