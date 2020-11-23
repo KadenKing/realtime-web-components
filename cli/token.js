@@ -1,6 +1,9 @@
 const axios = require('./axiosInstance');
 const fs = require('fs');
 const inquirer = require('inquirer');
+const os = require('os')
+const path = require('path')
+const dir = path.join(os.homedir(), '.rtc-config');
 
 const questions = [
     {
@@ -11,7 +14,8 @@ const questions = [
 ];
 
 const newProject = async () => {
-    let token = JSON.parse(fs.readFileSync('auth.txt').toString())["access_token"]
+    const token = JSON.parse(fs.readFileSync(`${dir}/auth.txt`).toString())["access_token"]
+    //let token = JSON.parse(fs.readFileSync('auth.txt').toString())["access_token"]
 
     const {projectName} = await inquirer.prompt(questions);
 
