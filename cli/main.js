@@ -5,6 +5,9 @@ const {newProject} = require('./token.js');
 const {attemptLogin/*, getUsernameFromToken*/} = require('./auth.js');
 const {getProjects} = require('./requests.js')
 const {getTokenFromDisk} = require('./storeToken.js')
+const os = require('os')
+const path = require('path')
+const dir = path.join(os.homedir(), '.rtc-config');
 
 /**
  * manual retrying is a nightmare use https://www.npmjs.com/package/axios-retry
@@ -17,6 +20,9 @@ const {getTokenFromDisk} = require('./storeToken.js')
  * handle renewing tokens silently
  */
 
+ /**
+  * main menu options
+  */
 const whatDo = [
     {
         type: 'list',
@@ -26,8 +32,11 @@ const whatDo = [
     }
 ]
 
+/**
+ * 
+ */
 const handleAuth = async () => {
-    if (!fs.existsSync('auth.txt')){
+    if (!fs.existsSync(`${dir}/auth.txt`)){
 
         const tokenString = await attemptLogin();
 
