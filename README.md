@@ -1,32 +1,19 @@
-## Elixir Server
+# Realtime Web Components
 
-### prereqs
+## Usage Guide
 
-Install elixir to enable mix (using homebrew on mac) `brew install elixer`
+### Prereqs
 
-Install phoenix `mix archive.install hex phx_new 1.5.4`
+* Unix system (Linux, MacOS, WSL, etc.)
+* `npm`
 
-Install and have postgres running with username `postgres`, password `postgres`
+### Setup
+
+1. Install configuration cli `sudo npm install rtwc@0.0.7 --global` 
+2. run rtwc in your command line 
+
+![cli](screenshots/cli.png)
 
 
-# Start Server
-
-To start your Phoenix server:
-
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.setup`
-  * Install Node.js dependencies with `npm install` inside the `assets` directory
-  * Start Phoenix endpoint with `mix phx.server`
-
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
-
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
-
-## Learn more
-
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+3. create an account 
 
