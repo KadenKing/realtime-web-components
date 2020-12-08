@@ -42,3 +42,26 @@ ReactDOM.render(
   document.getElementById('root')
 );
 ```
+
+7. now you can use realtime components throughout your project by importing them as shown: 
+
+```javascript
+import React, { useEffect, useState } from 'react';
+import RTTextInput from 'react-realtimewebcomponents/dist/TextInput/RTTextInput'
+
+function App() {
+  //const token = jwt.sign({user: 'u1234'}, 'shh');
+
+  return (
+
+      <div className="App">
+        <header className="App-header">
+          <RTTextInput style={{marginBottom: "40px"}} id="text1"></RTTextInput>
+        </header>
+      </div>
+  );
+}
+
+export default App;
+
+```
