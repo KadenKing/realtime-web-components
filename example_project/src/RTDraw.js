@@ -1,6 +1,6 @@
 import React,{useEffect, useState} from 'react'
 import CanvasDraw from "react-canvas-draw";
-import { useRealtimeData } from 'cra-rtc/dist/hooks/realtime';
+import { useRealtimeData } from 'react-realtimewebcomponents/dist/hooks/realtime';
 
 const RTDraw = ({id}) => {
     var ref = undefined

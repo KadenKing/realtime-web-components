@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-//import RTTextInput from 'cra-rtc/dist/TextInput/RTTextInput'
-import RTTextInput from 'cra-rtc/dist/TextInput/RTTextInput'
-import RTTextArea from 'cra-rtc/dist/TextInput/RTTextArea'
+//import RTTextInput from 'react-realtimewebcomponents/dist/TextInput/RTTextInput'
+import RTTextInput from 'react-realtimewebcomponents/dist/TextInput/RTTextInput'
+import RTTextArea from 'react-realtimewebcomponents/dist/TextInput/RTTextArea'
 import RTDraw from './RTDraw'
-import LikeCounter from 'cra-rtc/dist/NumericInput/LikeCounter'
+import LikeCounter from 'react-realtimewebcomponents/dist/NumericInput/LikeCounter'
 import jwt from 'jsonwebtoken'
 import CanvasDraw from "react-canvas-draw";
 /**

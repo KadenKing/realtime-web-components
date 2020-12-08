@@ -29,7 +29,13 @@ const useChannel = channelName => {
 
 const useRealtimeData = id => {
   const context = useContext(RTContext);
-  const [channel, val] = useChannel(`room:${context.projectID}:${id}`);
+  var projectID = context.projectID;
+
+  if (!projectID) {
+    projectID = context.id;
+  }
+
+  const [channel, val] = useChannel(`room:${projectID}:${id}`);
   const [text, setStateText] = useState();
 
   const setText = text => {

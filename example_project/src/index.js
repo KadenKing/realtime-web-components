@@ -3,10 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import {RTContext} from 'cra-rtc/dist/rtInit'
+import {RTContext} from 'react-realtimewebcomponents/dist/rtInit'
 
-const config = {
-  projectID: "abc123"
+const config ={
+  id: "f6dad0f9-ac3e-490d-83cb-d1683418fd6f",
+  name: "test",
+  user_id: 2
 }
 
 ReactDOM.render(
